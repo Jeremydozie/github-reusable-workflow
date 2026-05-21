@@ -1,0 +1,14 @@
+name: Pull request
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    uses: ./.github/workflows/nodejs-ci.yml
+    with:
+      node-version: "24"
+      working-directory: "."
+      run-integration-tests: false
+      upload-coverage: false
