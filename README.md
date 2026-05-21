@@ -72,6 +72,8 @@ The calling repository must define npm scripts used by this workflow:
 - `test:unit`
 - `test:integration` (if `run-integration-tests: true`)
 
+For coverage reports, generate coverage inside your `test:unit` script (e.g. `jest --coverage`), not via extra CLI flags in this workflow.
+
 Include a `package-lock.json` at `working-directory` and a `Dockerfile` at the repo root if you use the build job.
 
 ## Repository access
