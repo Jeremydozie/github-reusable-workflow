@@ -6,7 +6,10 @@ Shared [GitHub Actions reusable workflows](https://docs.github.com/en/actions/us
 
 | Workflow | File | Purpose |
 |----------|------|---------|
-| Node.js CI | [`.github/workflows/nodejs-ci.yml`](.github/workflows/nodejs-ci.yml) | Lint, unit tests, optional integration tests, Docker build |
+| Node.js CI | [`.github/workflows/nodejs-ci.yml`](.github/workflows/nodejs-ci.yml) | Reusable CI: lint, unit tests, optional integration tests, Docker build |
+| Run CI on main | [`.github/workflows/run-on-main.yml`](.github/workflows/run-on-main.yml) | Calls the reusable workflow on every push to `main` (smoke test) |
+
+Pushing to `main` runs **Run CI on main**, which invokes the reusable workflow in this repo. Minimal `package.json`, `package-lock.json`, and `Dockerfile` exist here only so that smoke run succeeds.
 
 ## Release a version
 

@@ -1,0 +1,10 @@
+{
+  "name": "github-reusable-workflow-smoke",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "lint": "node -e \"console.log('lint ok')\"",
+    "test:unit": "node -e \"console.log('unit tests ok')\"",
+    "test:integration": "node -e \"console.log('integration tests ok')\""
+  }
+}
