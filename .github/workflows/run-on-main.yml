@@ -8,7 +8,7 @@ jobs:
   ci:
     uses: ./.github/workflows/nodejs-ci.yml
     with:
-      node-version: "20"
+      node-version: "24"
       working-directory: "."
       run-integration-tests: true
       upload-coverage: false
