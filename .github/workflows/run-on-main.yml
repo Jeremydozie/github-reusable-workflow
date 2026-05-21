@@ -11,3 +11,4 @@ jobs:
       node-version: "20"
       working-directory: "."
       run-integration-tests: false
+      upload-coverage: false
