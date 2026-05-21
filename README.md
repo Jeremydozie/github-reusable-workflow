@@ -38,6 +38,7 @@ jobs:
       node-version: "20"
       working-directory: "."
       run-integration-tests: false
+      upload-coverage: true
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 ```
@@ -49,6 +50,7 @@ jobs:
 | `node-version` | string | `"20"` | Node.js version |
 | `working-directory` | string | `"."` | Path to `package.json` |
 | `run-integration-tests` | boolean | `false` | Run Postgres-backed integration job |
+| `upload-coverage` | boolean | `false` | Upload coverage to Codecov (set `true` when passing `CODECOV_TOKEN`) |
 
 ### Secrets
 
