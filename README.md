@@ -35,7 +35,7 @@ jobs:
   ci:
     uses: Jeremydozie/github-reusable-workflow/.github/workflows/nodejs-ci.yml@v1.0.0
     with:
-      node-version: "20"
+      node-version: "24"
       working-directory: "."
       run-integration-tests: false
       upload-coverage: true
@@ -47,7 +47,7 @@ jobs:
 
 | Input | Type | Default | Description |
 |-------|------|---------|-------------|
-| `node-version` | string | `"20"` | Node.js version |
+| `node-version` | string | `"24"` | Node.js version |
 | `working-directory` | string | `"."` | Path to `package.json` |
 | `run-integration-tests` | boolean | `false` | Run Postgres-backed integration job |
 | `upload-coverage` | boolean | `false` | Upload coverage to Codecov (set `true` when passing `CODECOV_TOKEN`) |

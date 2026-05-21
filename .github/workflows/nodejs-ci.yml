@@ -7,7 +7,7 @@ on:
         description: Node.js version
         required: false
         type: string
-        default: "20"
+        default: "24"
       working-directory:
         description: Path to package root
         required: false
@@ -32,6 +32,9 @@ on:
         description: Docker image tag produced by build job
         value: ${{ jobs.build.outputs.image-tag }}
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 permissions:
   contents: read
 
@@ -47,9 +50,9 @@ jobs:
       run:
         working-directory: ${{ inputs.working-directory }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ inputs.node-version }}
           cache: npm
@@ -91,8 +94,8 @@ jobs:
     env:
       DATABASE_URL: postgresql://test:test@localhost:5432/app_test
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: ${{ inputs.node-version }}
           cache: npm
@@ -107,7 +110,7 @@ jobs:
     outputs:
       image-tag: ${{ steps.meta.outputs.tags }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Docker meta
         id: meta
