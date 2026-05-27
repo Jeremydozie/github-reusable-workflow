@@ -1,0 +1,53 @@
+name: Auto release tag
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  tag-release:
+    name: Create release tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Skip if current commit is already tagged
+        id: skip
+        run: |
+          existing_tag=$(git tag --points-at HEAD)
+          if [ -n "$existing_tag" ]; then
+            echo "Tag already exists: $existing_tag"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Determine next tag
+        if: steps.skip.outputs.skip == 'false'
+        id: next_tag
+        run: |
+          old_tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "old_tag=$old_tag"
+          if [ "$old_tag" = "v0.0.0" ]; then
+            new_tag=v0.1.0
+          else
+            version=${old_tag#v}
+            IFS='.' read -r major minor patch <<< "$version"
+            patch=$((patch + 1))
+            new_tag="v${major}.${minor}.${patch}"
+          fi
+          echo "new_tag=$new_tag" >> "$GITHUB_OUTPUT"
+
+      - name: Create and push tag
+        if: steps.skip.outputs.skip == 'false'
+        run: |
+          git tag "${{ steps.next_tag.outputs.new_tag }}"
+          git push origin "${{ steps.next_tag.outputs.new_tag }}"
