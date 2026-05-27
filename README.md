@@ -13,7 +13,11 @@ Pushing to `main` runs **Run CI on main**, which invokes the reusable workflow i
 
 ## Release a version
 
-Tag this repository so callers can pin a ref:
+A release tag is created automatically on every push to `main`.
+
+Tags are generated as `v<major>.<minor>.<patch>`, with the patch number incremented on each new main commit.
+
+You can still create a manual tag if needed:
 
 ```bash
 git tag v1.0.0
